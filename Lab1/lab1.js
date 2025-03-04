@@ -6,6 +6,21 @@ function triangle(value1, type1, value2, type2) {
         console.log("failed");
         return "failed";
     }
+
+    const min = 0.000001;  
+    const max = 1000000;  
+
+    if (value1 < min || value2 < min) {
+        console.log("Помилка: Значення надто малі для обчислень.");
+        console.log("failed");
+        return "failed";
+    }
+    
+    if (value1 > max || value2 > max) {
+        console.log("Помилка: Значення надто великі для реального трикутника.");
+        console.log("failed");
+        return "failed";
+    }
     
     let a, b, c, alpha, beta;
     const toRadians = (deg) => deg * Math.PI / 180;
@@ -80,3 +95,4 @@ triangle(6, "leg", 45, "opposite angle");
 triangle(6, "leg", 45, "adjacent angle");
 triangle(6, "leg", 10, "hypotenuse");
 triangle(6, "leg", 1, "hypotenuse");
+triangle(0.00000001, "leg", 100000000, "hypotenuse");
