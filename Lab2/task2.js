@@ -27,8 +27,8 @@ class Truck {
 
 let truck1 = new Truck("white", 6000, 90.5, "Audi", "A6");
 let truck2 = new Truck("black", 6400, 80.2, "Skoda", "FL");
-truck1.AssignDriver("Khrystyna Palii", true, 10);  
-truck2.AssignDriver("Palii Khrystyna", false, 5); 
+truck1.AssignDriver("Khrystyna Palii", true, 2);  
+truck2.AssignDriver("Palii Khrystyna", false, 3); 
 console.log(truck1);
 console.log(truck2);
 truck1.trip();
