@@ -1,7 +1,6 @@
 function Triangular(a = 1, b = 2, c = 3) {
     return { a, b, c };
 }
-
 const t1 = Triangular();
 const t2 = Triangular(7, 4, 9);
 const t3 = Triangular(10, 14, 19);
