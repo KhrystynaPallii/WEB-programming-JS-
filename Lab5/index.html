@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="uk">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
+  <title>Л.Р. №5</title>
+  <link rel="stylesheet" href="index.css" />
+</head>
+<body>
+  <h1>лабораторна роботи №5</h1>
+
+  <div class="controls">
+    <label for="difficulty">Рівень складності:</label>
+    <select id="difficulty">
+      <option value="easy">Легкий</option>
+      <option value="medium">Середній</option>
+      <option value="hard">Важкий</option>
+    </select>
+
+    <label for="color">Колір квадрата:</label>
+    <input type="color" id="color" value="#ff0000" />
+
+    <button id="startBtn">Старт</button>
+  </div>
+
+  <div id="gameArea"></div>
+
+  <div id="scoreBoard">
+    <p>Рахунок: <span id="score">0</span></p>
+    <p>Залишилось часу: <span id="timer">0</span> сек</p>
+  </div>
+
+  <script src="script.js"></script>
+</body>
+</html>
