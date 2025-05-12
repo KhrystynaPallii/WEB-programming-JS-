@@ -1,17 +1,25 @@
 <!DOCTYPE html>
-<html lang="en">
+<html lang="uk">
 <head>
   <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Lights Out</title>
+  <title>Lights Out Game</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
-  <button id="restart-button">Нова гра</button>
-  <button id="newgame-button">Рестарт</button>
-  <div id="game-container"></div>
-  <div id="timer"></div>
+  <h1>Lights Out Game</h1>
 
-  <script src="script.js">  </script>
+  <select id="levelSelect">
+    <option value="a">Level 1</option>
+    <option value="b">Level 2</option>
+    <option value="c">Level 3</option>
+  </select>
+
+  <button id="startBtn">Start</button>
+  <button id="restartBtn">Restert</button>
+
+  <div id="timer">Time: 0 с</div>
+  <div id="grid"></div>
+
+  <script src="script.js"></script>
 </body>
 </html>
