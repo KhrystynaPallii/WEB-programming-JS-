@@ -4,11 +4,22 @@ let timerInterval;
 let startTime;
 
 async function loadMap() {
-  const response = await fetch('map.json');
-  return await response.json();
+  try {
+    const response = await fetch('map.json');
+    if (!response.ok) throw new Error('Не вдалося завантажити map.json');
+    return await response.json();
+  } catch (error) {
+    console.error('Помилка при завантаженні карти:', error);
+    return null;
+  }
 }
 
 function createGrid(levelData) {
+  if (!levelData) {
+    console.error('Дані для рівня не визначено або вони невалідні');
+    return;
+  }
+
   grid = [];
   const gridContainer = document.getElementById('grid');
   gridContainer.innerHTML = ''; 
@@ -32,7 +43,7 @@ function createGrid(levelData) {
 }
 
 function toggleCell(i, j) {
-  const dirs = [[0,0], [-1,0], [1,0], [0,-1], [0,1]];
+  const dirs = [[0, 0], [-1, 0], [1, 0], [0, -1], [0, 1]];
   for (const [dx, dy] of dirs) {
     const x = i + dx, y = j + dy;
     if (x >= 0 && x < SIZE && y >= 0 && y < SIZE) {
@@ -56,7 +67,18 @@ function stopTimer() {
 document.getElementById('startBtn').addEventListener('click', async () => {
   const level = document.getElementById('levelSelect').value;
   const mapData = await loadMap();
+
+  if (!mapData) {
+    console.error('Не вдалося завантажити дані карти');
+    return;
+  }
+
   const levelData = mapData[level];
+
+  if (!levelData) {
+    console.error(`Дані для рівня: ${level} не знайдено`);
+    return;
+  }
 
   createGrid(levelData);
   startTimer();
@@ -65,9 +87,20 @@ document.getElementById('startBtn').addEventListener('click', async () => {
 document.getElementById('restartBtn').addEventListener('click', async () => {
   const level = document.getElementById('levelSelect').value;
   const mapData = await loadMap();
+
+  if (!mapData) {
+    console.error('Не вдалося завантажити дані карти');
+    return;
+  }
+
   const levelData = mapData[level];
 
+  if (!levelData) {
+    console.error(`Дані для рівня: ${level} не знайдено`);
+    return;
+  }
+
   createGrid(levelData);
-  stopTimer();  
-  startTimer();
+  stopTimer(); 
+  startTimer(); 
 });
