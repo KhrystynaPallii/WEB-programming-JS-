@@ -62,14 +62,12 @@ document.getElementById('startBtn').addEventListener('click', async () => {
   startTimer();
 });
 
-document.getElementById('restartBtn').addEventListener('click', () => {
+document.getElementById('restartBtn').addEventListener('click', async () => {
   const level = document.getElementById('levelSelect').value;
-  const mapData = loadMap();
-  mapData.then(data => {
-    const levelData = data[level];
-    createGrid(levelData);
-    startTime = performance.now();
-    stopTimer();
-    startTimer();
-  });
+  const mapData = await loadMap();
+  const levelData = mapData[level];
+
+  createGrid(levelData);
+  stopTimer();  
+  startTimer();
 });
