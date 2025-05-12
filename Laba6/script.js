@@ -1,146 +1,75 @@
-let currentMap;
-let currentIndex;
+const SIZE = 5;
+let grid = [];
+let timerInterval;
+let startTime;
 
-function loadRandomMap() {
-    fetch('Map.json')
-      .then(response => response.json())
-      .then(data => {
-        const maps = data.map(item => item.map);
-        randomIndex(maps.length);
-        currentMap = maps[currentIndex];
-        renderMap(currentMap);
-        startTimer();
-        checkWin(); // Перевірка перемоги після завантаження нової мапи
-      })
-      .catch(error => console.error('Error loading map:', error));
-  }
-  function randomIndex(length){
-    
-        while (true)
-        {
-            const randomIndex =Math.floor(Math.random() * length);
-            if(currentIndex != randomIndex)
-            {
-                currentIndex=randomIndex;
-                return;
-            }
-           
-        }
-    
-  }
-
-  function loadMapFromJson() {
-    fetch('Map.json')
-      .then(response => response.json())
-      .then(data => {
-        const maps = data.map(item => item.map);
-        currentMap = maps[currentIndex]; // Використовуємо поточний індекс
-        renderMap(currentMap);
-        startTimer();
-        checkWin(); // Перевірка перемоги після завантаження нової мапи
-      })
-      .catch(error => console.error('Error loading map:', error));
+async function loadMap() {
+  const response = await fetch('map.json');
+  return await response.json();
 }
-  
 
-function renderMap(map) {
-    const container = document.getElementById('game-container');
-    container.innerHTML = '';
-  
-    map.forEach((row, rowIndex) => {
-      const rowElement = document.createElement('div');
-      rowElement.classList.add('row');
-  
-      row.forEach((cell, colIndex) => {
-        const cellElement = document.createElement('div');
-        cellElement.classList.add('cell');
-        cellElement.classList.toggle('on', cell === 1);
-        cellElement.setAttribute('data-row', rowIndex);
-        cellElement.setAttribute('data-col', colIndex);
-        rowElement.appendChild(cellElement);
-        checkWin();
-      });
-  
-      container.appendChild(rowElement);
-    });
-  }
-  
-  function toggleCell(row, col) {
-    currentMap[row][col] = 1 - currentMap[row][col]; // змінюємо стан клітинки
-  
-    // змінюємо стан сусідніх клітинок
-    const directions = [[0, 1], [1, 0], [0, -1], [-1, 0]];
-    directions.forEach(dir => {
-      const newRow = row + dir[0];
-      const newCol = col + dir[1];
-      if (newRow >= 0 && newRow < currentMap.length && newCol >= 0 && newCol < currentMap[0].length) {
-        currentMap[newRow][newCol] = 1 - currentMap[newRow][newCol];
-      }
-    });
-  
-    renderMap(currentMap);
-  }
-  function resetMap() {
-    loadRandomMap();
-  }
-  
-  document.addEventListener('DOMContentLoaded', function() {
-    loadRandomMap();
-  
-    document.getElementById('restart-button').addEventListener('click', function() {
-        loadRandomMap();
-      
-    });
-    document.getElementById('newgame-button').addEventListener('click',function(){
-        loadMapFromJson(currentIndex);
-    });
-        
-    
-  
-    document.getElementById('game-container').addEventListener('click', function(event) {
-      if (event.target.classList.contains('cell')) {
-        const cell = event.target;
-        const row = cell.getAttribute('data-row');
-        const col = cell.getAttribute('data-col');
-        toggleCell(parseInt(row), parseInt(col));
-      }
-    });
-  });
-  
-  
+function createGrid(levelData) {
+  grid = [];
+  const gridContainer = document.getElementById('grid');
+  gridContainer.innerHTML = ''; 
 
-  let timerInterval;
-let seconds = 0;
+  for (let i = 0; i < SIZE; i++) {
+    const row = [];
+    for (let j = 0; j < SIZE; j++) {
+      const cell = document.createElement('div');
+      cell.classList.add('cell');
+      if (levelData[i][j] === 1) {
+        cell.classList.add('on');
+      }
+
+      cell.addEventListener('click', () => toggleCell(i, j));
+
+      gridContainer.appendChild(cell);
+      row.push(cell);
+    }
+    grid.push(row);
+  }
+}
+
+function toggleCell(i, j) {
+  const dirs = [[0,0], [-1,0], [1,0], [0,-1], [0,1]];
+  for (const [dx, dy] of dirs) {
+    const x = i + dx, y = j + dy;
+    if (x >= 0 && x < SIZE && y >= 0 && y < SIZE) {
+      grid[x][y].classList.toggle('on');
+    }
+  }
+}
 
 function startTimer() {
+  startTime = performance.now();
+  timerInterval = setInterval(() => {
+    const elapsed = ((performance.now() - startTime) / 1000).toFixed(2);
+    document.getElementById('timer').textContent = `Час: ${elapsed} с`;
+  }, 100);
+}
+
+function stopTimer() {
   clearInterval(timerInterval);
-  seconds = 0;
-  updateTimer();
-  timerInterval = setInterval(function() {
-    seconds++;
-    updateTimer();
-  }, 1000);
 }
 
-function updateTimer() {
-  const timerElement = document.getElementById('timer');
-  timerElement.textContent = 'Час: ' + seconds + ' с';
-}
-function checkWin() {
-    let allCellsZero = true;
-    currentMap.forEach(row => {
-        row.forEach(cell => {
-            if (cell !== 0) {
-                allCellsZero = false;
-                return;
-            }
-        });
-    });
+document.getElementById('startBtn').addEventListener('click', async () => {
+  const level = document.getElementById('levelSelect').value;
+  const mapData = await loadMap();
+  const levelData = mapData[level];
 
-    if (allCellsZero) {
-        alert('You win!');
-        optionsDiv.style.display = 'block';
-       
-       
-    }
-}
+  createGrid(levelData);
+  startTimer();
+});
+
+document.getElementById('restartBtn').addEventListener('click', () => {
+  const level = document.getElementById('levelSelect').value;
+  const mapData = loadMap();
+  mapData.then(data => {
+    const levelData = data[level];
+    createGrid(levelData);
+    startTime = performance.now();
+    stopTimer();
+    startTimer();
+  });
+});
