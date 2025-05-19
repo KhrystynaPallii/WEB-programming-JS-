@@ -1,1 +1,41 @@
+{
+    "category": "Фрукти",
+    "items": [
+      {
+        "id": 1,
+        "name": "Банан Бразильський",
+        "shortname": "banana",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "108 грн"
+      },
+      {
+        "id": 2,
+        "name": "Яблуко 'Голден'",
+        "shortname": "apple",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "68 грн"
+      },
+      {
+        "id": 3,
+        "name": "Апельсин",
+        "shortname": "orange",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "110 грн"
+      },
+      {
+        "id": 4,
+        "name": "Груша Солодка",
+        "shortname": "pear",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "88 грн"
+      },
+      {
+        "id": 5,
+        "name": "Полуниця Закарпатська",
+        "shortname": "strawberry",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "200 грн"
+      }
+    ]
+  }
 
