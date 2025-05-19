@@ -1,38 +1,38 @@
 {
-    "category": "Фрукти",
+    "category": "Снеки",
     "items": [
       {
         "id": 1,
-        "name": "Банан Бразильський",
-        "shortname": "banana",
+        "name": "Чипси 'Люкс з беконом",
+        "shortname": "luks",
         "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
-        "price": "108 грн"
+        "price": "80 грн"
       },
       {
         "id": 2,
-        "name": "Яблуко 'Голден'",
-        "shortname": "apple",
+        "name": "Сухарики 'Флінт з сметаною та зеленню",
+        "shortname": "flint",
         "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
-        "price": "68 грн"
+        "price": "40 грн"
       },
       {
         "id": 3,
-        "name": "Апельсин",
-        "shortname": "orange",
+        "name": "Арахіс 'Козацька Слава' солений",
+        "shortname": "peanut",
         "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
-        "price": "110 грн"
+        "price": "56 грн"
       },
       {
         "id": 4,
-        "name": "Груша Солодка",
-        "shortname": "pear",
+        "name": "Чипси 'Lays з сиром'",
+        "shortname": "lays",
         "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
-        "price": "88 грн"
+        "price": "90 грн"
       },
       {
         "id": 5,
-        "name": "Полуниця Закарпатська",
-        "shortname": "strawberry",
+        "name": "Чипси 'Pringles з паприкою'",
+        "shortname": "pringles",
         "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
         "price": "200 грн"
       }
