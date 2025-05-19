@@ -14,26 +14,37 @@ function loadCategories() {
     .then(data => {
       const content = document.getElementById('content');
       content.innerHTML = '<h2>Категорії</h2>';
+
+      const container = document.createElement('div');
+      container.className = 'category-container';
+
       data.forEach(cat => {
-        const link = document.createElement('a');
-        link.href = '#';
-        link.textContent = cat.name;
-        link.onclick = () => loadItems(cat.shortname);
-        content.appendChild(link);
-        content.appendChild(document.createElement('br'));
+        const card = document.createElement('div');
+        card.className = 'category-card';
+        card.onclick = () => loadItems(cat.shortname);
+
+        card.innerHTML = `
+          <img src="https://place-hold.it/150x150?text=${encodeURIComponent(cat.name)}" alt="${cat.name}" />
+          <h3>${cat.name}</h3>
+          <p>${cat.notes || 'Опис відсутній.'}</p>
+        `;
+        container.appendChild(card);
       });
+
+      content.appendChild(container);
 
       const specialLink = document.createElement('a');
       specialLink.href = '#';
       specialLink.textContent = "Specials";
+      specialLink.className = 'specials-link';
       specialLink.onclick = () => {
         const random = data[Math.floor(Math.random() * data.length)];
         loadItems(random.shortname);
       };
-      content.appendChild(document.createElement('br'));
       content.appendChild(specialLink);
     });
 }
+
 
 function loadItems(category) {
   fetch(`data/${category}.json`)
