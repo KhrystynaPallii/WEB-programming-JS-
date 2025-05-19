@@ -1,1 +1,27 @@
-
+[
+    {
+      "id": 1,
+      "name": "Овочі",
+      "shortname": "vegetables",
+      "notes": "Свіжі овочі та зелень"
+    },
+    {
+      "id": 2,
+      "name": "Фрукти",
+      "shortname": "fruits",
+      "notes": "Солодкі та соковиті фрукти"
+    },
+    {
+      "id": 3,
+      "name": "Снеки",
+      "shortname": "snacks",
+      "notes": "Хрусткі чипси та багато іншого"
+    },
+    {
+      "id": 4,
+      "name": "Молочні продукти",
+      "shortname": "dairyproducts",
+      "notes": "Молоко, сир та багато іншого"
+    }
+  ]
+  
