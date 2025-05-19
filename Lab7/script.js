@@ -1,6 +1,13 @@
 document.getElementById("catalog").addEventListener("click", loadCategories);
 document.getElementById("home").addEventListener("click", () => location.reload());
 
+function showHome() {
+  const content = document.getElementById("content");
+  content.innerHTML = `
+    <h2>Ласкаво просимо до каталогу!</h2>
+    <p>Натисніть «Каталог», щоб переглянути доступні категорії товарів.</p>`;
+}
+
 function loadCategories() {
   fetch('data/categories.json')
     .then(res => res.json())
