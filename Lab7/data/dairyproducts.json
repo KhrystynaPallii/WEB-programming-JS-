@@ -1,1 +1,40 @@
-
+{
+    "category": "Молочні продукти",
+    "items": [
+      {
+        "id": 1,
+        "name": "Молоко 'Ферма' ",
+        "shortname": "milk",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "76 грн"
+      },
+      {
+        "id": 2,
+        "name": "Сир 'Чедер'",
+        "shortname": "cheese",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "68 грн"
+      },
+      {
+        "id": 3,
+        "name": "Кефір",
+        "shortname": "kefir",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "57 грн"
+      },
+      {
+        "id": 4,
+        "name": "Сирок плавлений вершковий ",
+        "shortname": "pcheese",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "24 грн"
+      },
+      {
+        "id": 5,
+        "name": "Сметана 30% 'Ферма'",
+        "shortname": "sour",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "80 грн"
+      }
+    ]
+  }
