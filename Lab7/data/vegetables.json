@@ -1,1 +1,40 @@
-
+{
+    "category": "Овочі",
+    "items": [
+      {
+        "id": 1,
+        "name": "Томат 'Український'",
+        "shortname": "tomato",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "86 грн"
+      },
+      {
+        "id": 2,
+        "name": "Огірок 'Домашній'",
+        "shortname": "cucumber",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "78 грн"
+      },
+      {
+        "id": 3,
+        "name": "Картопля біла",
+        "shortname": "potato",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "56 грн"
+      },
+      {
+        "id": 4,
+        "name": "Капуста білокачанна",
+        "shortname": "cabbage",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "48 грн"
+      },
+      {
+        "id": 5,
+        "name": "Морква мита",
+        "shortname": "carrot",
+        "description": "Lorem ipsum dolor sit amet. Lorem ipsum dolor sit amet.",
+        "price": "49 грн"
+      }
+    ]
+  }
