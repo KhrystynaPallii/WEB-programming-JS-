@@ -1,6 +1,13 @@
+document.getElementById("home").addEventListener("click", showHome);
 document.getElementById("catalog").addEventListener("click", loadCategories);
-document.getElementById("home").addEventListener("click", () => location.reload());
 
+function showHome() {
+  const content = document.getElementById("content");
+  content.innerHTML = `
+    <h2>Ласкаво просимо до каталогу!</h2>
+    <p>Натисніть «Каталог», щоб переглянути доступні категорії товарів.</p>
+  `;
+}
 
 function loadCategories() {
   fetch('data/categories.json')
@@ -44,24 +51,28 @@ function loadCategories() {
     });
 }
 
-
-
 function loadItems(category) {
   fetch(`data/${category}.json`)
     .then(res => res.json())
     .then(data => {
       const content = document.getElementById('content');
       content.innerHTML = `<h2>${data.category}</h2>`;
+
+      const container = document.createElement('div');
+      container.className = 'items-container';
+
       data.items.forEach(item => {
         const div = document.createElement('div');
+        div.className = 'item-card';
         div.innerHTML = `
           <img src="https://place-hold.it/150x150" alt="${item.name}" />
           <h3>${item.name}</h3>
           <p>${item.description}</p>
           <strong>${item.price}</strong>
         `;
-        content.appendChild(div);
+        container.appendChild(div);
       });
+
+      content.appendChild(container);
     });
 }
-
