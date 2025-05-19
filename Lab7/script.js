@@ -1,12 +1,6 @@
 document.getElementById("catalog").addEventListener("click", loadCategories);
 document.getElementById("home").addEventListener("click", () => location.reload());
 
-function showHome() {
-  const content = document.getElementById("content");
-  content.innerHTML = `
-    <h2>Ласкаво просимо до каталогу!</h2>
-    <p>Натисніть «Каталог», щоб переглянути доступні категорії товарів.</p>`;
-}
 
 function loadCategories() {
   fetch('data/categories.json')
@@ -24,26 +18,32 @@ function loadCategories() {
         card.onclick = () => loadItems(cat.shortname);
 
         card.innerHTML = `
-          <img src="https://place-hold.it/150x150?text=${encodeURIComponent(cat.name)}" alt="${cat.name}" />
+          <img src="https://place-hold.it/150x150" alt="${cat.name}" />
           <h3>${cat.name}</h3>
           <p>${cat.notes || 'Опис відсутній.'}</p>
         `;
         container.appendChild(card);
       });
 
-      content.appendChild(container);
-
-      const specialLink = document.createElement('a');
-      specialLink.href = '#';
-      specialLink.textContent = "Specials";
-      specialLink.className = 'specials-link';
-      specialLink.onclick = () => {
+      const specialsCard = document.createElement('div');
+      specialsCard.className = 'category-card';
+      specialsCard.onclick = () => {
         const random = data[Math.floor(Math.random() * data.length)];
         loadItems(random.shortname);
       };
-      content.appendChild(specialLink);
+
+      specialsCard.innerHTML = `
+        <img src="https://place-hold.it/150x150" alt="Specials" />
+        <h3>Specials</h3>
+        <p>Переглянути випадкову категорію</p>
+      `;
+
+      container.appendChild(specialsCard);
+
+      content.appendChild(container);
     });
 }
+
 
 
 function loadItems(category) {
