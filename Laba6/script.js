@@ -2,6 +2,8 @@ const SIZE = 5;
 let grid = [];
 let timerInterval;
 let startTime;
+let steps = 0;
+let currentLevel = null;
 
 async function loadMap() {
   try {
@@ -21,6 +23,9 @@ function createGrid(levelData) {
   }
 
   grid = [];
+  steps = 0;
+  updateStepsDisplay();
+
   const gridContainer = document.getElementById('grid');
   gridContainer.innerHTML = '';
 
@@ -29,7 +34,7 @@ function createGrid(levelData) {
     for (let j = 0; j < SIZE; j++) {
       const cell = document.createElement('div');
       cell.classList.add('cell');
-      if (levelData[i][j] === 1) {
+      if (levelData.grid[i][j] === 1) {
         cell.classList.add('on');
       }
 
@@ -43,6 +48,8 @@ function createGrid(levelData) {
     }
     grid.push(row);
   }
+
+  updateMinStepsDisplay(levelData.minSteps ?? '-');
 }
 
 function toggleCell(i, j) {
@@ -53,18 +60,20 @@ function toggleCell(i, j) {
       grid[x][y].classList.toggle('on');
     }
   }
+  steps++;
+  updateStepsDisplay();
 }
 
 function checkWinCondition() {
   for (let i = 0; i < SIZE; i++) {
     for (let j = 0; j < SIZE; j++) {
       if (grid[i][j].classList.contains('on')) {
-        return; // Still some lights on, not a win
+        return;
       }
     }
   }
   stopTimer();
-  alert("Congratulations! You turned off all the lights!");
+  alert(`Congratulations! You turned off all the lights in ${steps} steps!`);
 }
 
 function startTimer() {
@@ -77,6 +86,14 @@ function startTimer() {
 
 function stopTimer() {
   clearInterval(timerInterval);
+}
+
+function updateStepsDisplay() {
+  document.getElementById('steps').textContent = `Steps: ${steps}`;
+}
+
+function updateMinStepsDisplay(minSteps) {
+  document.getElementById('minSteps').textContent = `Minimum Steps: ${minSteps}`;
 }
 
 document.getElementById('startBtn').addEventListener('click', async () => {
@@ -95,27 +112,39 @@ document.getElementById('startBtn').addEventListener('click', async () => {
     return;
   }
 
+  currentLevel = level;
   createGrid(levelData);
+  stopTimer();
   startTimer();
 });
 
 document.getElementById('restartBtn').addEventListener('click', async () => {
-  const level = document.getElementById('levelSelect').value;
   const mapData = await loadMap();
+  if (!mapData || !currentLevel) return;
 
-  if (!mapData) {
-    console.error('Failed to load map data');
-    return;
-  }
-
-  const levelData = mapData[level];
-
-  if (!levelData) {
-    console.error(`Level data for: ${level} not found`);
-    return;
-  }
+  const levelData = mapData[currentLevel];
+  if (!levelData) return;
 
   createGrid(levelData);
   stopTimer();
   startTimer();
+});
+
+document.getElementById('randomBtn').addEventListener('click', async () => {
+  const mapData = await loadMap();
+  if (!mapData) return;
+
+  const levels = Object.keys(mapData);
+  const randomLevel = levels[Math.floor(Math.random() * levels.length)];
+  const levelData = mapData[randomLevel];
+
+  currentLevel = randomLevel;
+  createGrid(levelData);
+  stopTimer();
+  startTimer();
+
+  const select = document.getElementById('levelSelect');
+  if ([...select.options].some(opt => opt.value === randomLevel)) {
+    select.value = randomLevel;
+  }
 });
