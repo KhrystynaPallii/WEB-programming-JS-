@@ -1,43 +1,68 @@
 body {
-    font-family: Arial, sans-serif;
-    background-color: #f4f4f4;
-    padding: 20px;
-  }
-  
-  h1 {
-    color: #190056;
-  }
-  
-  select, button {
-    padding: 10px;
-    margin-right: 10px;
-    font-size: 16px;
-  }
-  
-  #timer {
-    margin-top: 15px;
-    font-weight: bold;
-    color: #190056;
-  }
-  
-  #grid {
-    display: grid;
-    grid-template-columns: repeat(5, 40px);
-    grid-gap: 5px;
-    margin-top: 20px;
-  }
-  
-  .cell {
-    width: 40px;
-    height: 40px;
-    background-color: #ccc;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    cursor: pointer;
-  }
-  
-  .cell.on {
-    background-color: #190056;
-  }
-  
+  font-family: Arial, sans-serif;
+  background-color: #f4f4f4;
+  padding: 20px;
+  text-align: center;
+}
+
+h1 {
+  color: #190056;
+  margin-bottom: 20px;
+}
+
+select, button {
+  padding: 10px 15px;
+  margin: 5px;
+  font-size: 16px;
+  border: 2px solid #190056;
+  border-radius: 5px;
+  background-color: white;
+  color: #190056;
+  cursor: pointer;
+  transition: background-color 0.3s ease, color 0.3s ease;
+}
+
+select:focus, button:focus {
+  outline: none;
+}
+
+button:hover {
+  background-color: #190056;
+  color: white;
+}
+
+#infoPanel {
+  margin-top: 15px;
+  font-weight: bold;
+  color: #190056;
+}
+
+#timer, #steps, #minSteps {
+  margin: 5px;
+  font-size: 18px;
+}
+
+#grid {
+  display: grid;
+  grid-template-columns: repeat(5, 40px);
+  grid-gap: 5px;
+  justify-content: center;
+  margin: 20px auto;
+}
+
+.cell {
+  width: 40px;
+  height: 40px;
+  background-color: #190056;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  border-radius: 3px;
+  transition: background-color 0.2s ease;
+  cursor: pointer;
+  box-shadow: 0 0 3px rgba(0, 0, 0, 0.2);
+}
+
+.cell.on {
+  background-color: #f7ff56;
+}
