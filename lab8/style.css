@@ -1,0 +1,167 @@
+body {
+  font-family: sans-serif;
+  margin: 0;
+}
+
+header {
+  position: relative;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  background: #333;
+  color: white;
+  padding: 0 1rem;
+  height: 60px;
+  position: relative;
+  z-index: 10;
+}
+
+.nav-menu {
+  display: flex;
+  list-style: none;
+  gap: 1rem;
+}
+
+.nav-menu li a {
+  color: white;
+  text-decoration: none;
+}
+
+.hamburger {
+  display: none;
+  font-size: 2rem;
+  background: none;
+  border: none;
+  color: white;
+}
+
+.carousel {
+  position: relative;
+  overflow: hidden;
+  max-width: 100%;
+}
+
+.slides {
+  display: flex;
+  transition: transform 0.5s ease-in-out;
+}
+
+.slides img {
+  width: 100%;
+  height: 400px;
+  flex-shrink: 0;
+  object-fit: cover;
+}
+
+.prev, .next {
+  position: absolute;
+  top: 50%;
+  transform: translateY(-50%);
+  background: #333;
+  color: white;
+  border: none;
+  font-size: 2rem;
+  cursor: pointer;
+}
+
+.prev { left: 10px; }
+.next { right: 10px; }
+
+.indicators {
+  text-align: center;
+  margin-top: 10px;
+}
+
+.indicators span {
+  display: inline-block;
+  height: 10px;
+  width: 10px;
+  background: gray;
+  border-radius: 50%;
+  margin: 5px;
+  cursor: pointer;
+}
+
+.indicators .active {
+  background: black;
+}
+
+.image-wrapper {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  gap: 1rem;
+  flex-wrap: wrap;
+  margin: 2rem 0;
+}
+
+.image-wrapper img {
+  width: 300px;
+  height: 300px;
+  object-fit: cover;
+}
+
+.large-only,
+.medium-only {
+  display: none;
+  gap: 1rem;
+}
+
+@media (min-width: 768px) {
+  .hamburger {
+    display: none;
+  }
+
+  .large-only {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+
+  .medium-only {
+    display: none;
+  }
+}
+
+@media (max-width: 767px) {
+  .hamburger {
+    display: block;
+  }
+
+  .nav-menu {
+    display: none;
+    flex-direction: column;
+    background: #444;
+    width: 100%;
+    position: absolute;
+    top: 60px;
+    left: 0;
+    padding: 1rem;
+    z-index: 1000;
+  }
+
+  .nav-menu.active {
+    display: flex;
+    animation: dropdown 0.3s ease-out forwards;
+  }
+
+  @keyframes dropdown {
+    from { opacity: 0; transform: translateY(-10px); }
+    to { opacity: 1; transform: translateY(0); }
+  }
+
+  .large-only {
+    display: none;
+    height:100px;
+  }
+
+  .medium-only {
+    display: flex;
+    height:100px;
+    justify-content: center;
+    flex-direction: row;
+  }
+}
