@@ -2,22 +2,31 @@
 <html lang="uk">
 <head>
   <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <title>Lights Out Game</title>
   <link rel="stylesheet" href="style.css">
 </head>
 <body>
   <h1>Lights Out Game</h1>
 
- <select id="levelSelect">
-  <option value="a">Level 1</option>
-  <option value="b">Level 2</option>
-  <option value="c">Level 3</option>
-</select>
+  <div id="controls">
+    <select id="levelSelect">
+      <option value="a">Рівень A</option>
+      <option value="b">Рівень B</option>
+      <option value="c">Рівень C</option>
+    </select>
 
-  <button id="startBtn">Start</button>
-  <button id="restartBtn">Restart</button>
+    <button id="startBtn">Старт</button>
+    <button id="restartBtn">Рестарт</button>
+    <button id="randomBtn">Випадковий рівень</button>
+  </div>
 
-  <div id="timer">Time: 0 с</div>
+  <div id="infoPanel">
+    <div id="timer">Час: 0.00 с</div>
+    <div id="steps">Кроки: 0</div>
+    <div id="minSteps">Мін. кроків: -</div>
+  </div>
+
   <div id="grid"></div>
 
   <script src="script.js"></script>
